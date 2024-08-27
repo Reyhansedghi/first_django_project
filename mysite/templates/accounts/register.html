@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa_IR">
+
+<head>
+    <meta charset="utf-8">
+    <title>Makaan</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="{% static 'blog/img/favicon.ico' %}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'blog/lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'blog/lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'blog/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'blog/css/style.css' %}" rel="stylesheet">
+    
+</head>
+<body>
+    <div class="container-xxl bg-white p-0">
+
+
+        <!-- Contact Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    <h1 class="mb-3">ثبت نام</h1>
+                    <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+                </div>
+                <div class="row g-4" dir="rtl">
+                    <div class="col-12">
+                        <div class="wow fadeInUp" data-wow-delay="0.5s">
+                            <p class="mb-4">قبل از ثبت آگهی، لطفاً وارد حساب خود شوید.
+کد تأیید به این شماره موبایل وارد شده پیامک می‌شود.</p>
+                            <form method="POST">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input name="phone_number" value='{{form.phone_number.value}}' type="text" class="form-control" id="number" placeholder="Subject">
+                                            <label for="number">شماره موبایل</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input name="email" value='{{form.email.value}}' type="email" class="form-control" id="email" placeholder="Your Email">
+                                            <label for="email">ایمیل</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating" dir="rtl">
+                                            
+                                            <input name="first_name" value='{{form.first_name.value}}' type="text" class="form-control" id="firstname" placeholder="">
+                                            <label for="firstname">نام</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input name="last_name" value='{{form.last_name.value}}' type="text" class="form-control" id="lastname" placeholder="">
+                                            <label for="lastname">نام خانوادگی</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input name="password1" value='{{form.password1.value}}' type="text" class="form-control" id="pass1" placeholder="Subject">
+                                            <label for="pass1">رمز</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input name="password2" value='{{form.password2.value}}' type="text" class="form-control" id="pass2" placeholder="Your Email">
+                                            <label for="pass2">تکرار رمز</label>
+                                        </div>
+                                    </div>
+                                    {% csrf_token %}
+                                    <div class="col-12">
+                                        <p>شرایط استفاده از خدمات و حریم خصوصی ..... را می‌پذیرم.</p>
+                                        <input class="btn btn-primary w-100 py-3" type="submit" value="ارسال کد">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Contact End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+  <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'blog/lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'blog/lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'blog/lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'blog/lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'blog/js/main.js' %}"></script>
+    
+</body>
+
+</html>
