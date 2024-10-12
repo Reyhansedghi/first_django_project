@@ -20,10 +20,7 @@ class Post(models.Model):
     updated=models.DateTimeField(auto_now=timezone.now,)
     slug=models.CharField(null=True,blank=True,max_length=500)
     category=models.CharField(null=True,blank=True,max_length=500)
-    subcategory=models.CharField(null=True,blank=True,max_length=500)
-    subsubcategory=models.CharField(null=True,blank=True,max_length=500)
     tags=TaggableManager()
-
     class Meta:
       verbose_name = 'آگهی'
       verbose_name_plural = 'آگهی ها'
@@ -34,14 +31,12 @@ class Post(models.Model):
             if self.type=='product':
                 self.slug=self.product.slug
                 self.category=self.product.get_categoryslug()
-                self.subcategory=self.product.get_subcategoryslug()
-                self.subsubcategory=self.product.get_subsubcategoryslug()
             else:
                 self.slug=self.service.slug
                 self.category=self.service.get_categoryslug()
-                self.subcategory=self.service.get_subcategoryslug()
-                self.subsubcategory=self.service.get_subsubcategoryslug()
         return super().save(*args,**kwargs)
+    
+ 
 
 class Comment(models.Model):
     post=models.ForeignKey(Post,on_delete=models.CASCADE,related_name='postcomments',null=True)

@@ -1,0 +1,15 @@
+<p>
+
+{% for category in categories %}
+        
+        {% if category.parents %}
+        {% for parent in category.parents%}
+            >
+            <a href='#'>{{parent.title}} </a>
+        {% endfor%}
+        {% endif %}
+        >
+        <a href='#'>{{category.title}} </a>
+{% endfor %}
+
+</p>

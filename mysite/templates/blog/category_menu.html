@@ -1,0 +1,62 @@
+
+<div class="collapse navbar-collapse" id="main_nav">
+  <ul class="navbar-nav">
+    <li class="nav-item active"><a href='#' class="nav-item nav-link active">خانه</a></li>
+    <li class="nav-item"> <a href='{% url "accounts:profile" %}' class="nav-item nav-link">حساب کاربری</a></li>
+    <li class="nav-item dropdown" id="myDropdown">
+      <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"> کالا  </a>
+      <ul class="dropdown-menu">
+      {% for category  in productcategories %}
+        <li> <a class="dropdown-item" href='{% url "blog:categorypost_list" category.slug %}'>{{category.title}}</a>
+        {% if category.child.all %}
+          <ul class="submenu dropdown-menu">
+          {% for child in  category.child.all%}
+            <li><a class="dropdown-item" href='{% url "blog:categorypost_list" child.slug %}'>{{child.title}}</a>
+            {% if child.child.all %}
+              <ul class="submenu dropdown-menu">
+              {% for grandchild in child.child.all %}
+                <li><a class="dropdown-item" href='{% url "blog:categorypost_list" grandchild.slug %}'>{{grandchild.title}}</a></li>
+              {% endfor %}
+              </ul>
+            {% endif %}
+            </li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+        </li>
+      {% endfor %}
+      </ul>  
+    </li>
+    <li class="nav-item dropdown" id="myDropdown">
+      <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"> خدمات  </a>
+      <ul class="dropdown-menu">
+      {% for category  in servicecategories %}
+        <li> <a class="dropdown-item" href='{% url "blog:categorypost_list" category.slug %}'>{{category.title}}</a>
+        {% if category.child.all %}
+          <ul class="submenu dropdown-menu">
+          {% for child in  category.child.all %}
+            <li><a class="dropdown-item" href='{% url "blog:categorypost_list" child.slug %}'>{{child.title}}</a>
+            {% if child.child.all %}
+              <ul class="submenu dropdown-menu">
+              {% for grandchild in child.child.all %}
+                <li><a class="dropdown-item" href='{% url "blog:categorypost_list" grandchild.slug %}'>{{grandchild.title}}</a></li>
+              {% endfor %}
+              </ul>
+            {% endif %}
+            </li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+        </li>
+      {% endfor %}
+      </ul>  
+    </li>
+    <li class="nav-item"> <a href='{% url "accounts:profile" %}' class="nav-item nav-link">خرید اشتراک</a></li>
+  </ul>
+  {% if user.is_authenticated %}
+                    <a href='{% url "accounts:logout" %}' class="btn btn-primary px-3 d-none d-lg-flex" >خروج</a>
+  {% else %}
+                    <a href='{% url "accounts:login" %}' class="btn btn-primary px-3 d-none d-lg-flex" >ثبت نام/ورود</a>
+  {% endif %}
+</div>
+

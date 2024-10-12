@@ -42,10 +42,15 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'products.apps.ProductsConfig',
     'services.apps.ServicesConfig',
+    'cadmin.apps.CadminConfig',
     #lib
     'taggit',
+    'crispy_forms',
+    'crispy_bootstrap4',
+
 
 ]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -136,3 +141,6 @@ MEDIA_URL="media/"
 MEDIA_ROOT=BASE_DIR/"media"
 
 AUTH_USER_MODEL = "accounts.User"
+LOGIN_URL = '/login'
+
+LOGIN_REDIRECTURL=" "

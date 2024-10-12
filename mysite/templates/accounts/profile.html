@@ -1,0 +1,20 @@
+{% extends "blog/base.html" %}
+{% block content %}
+{%load crispy_forms_tags %} 
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row" dir="rtl">
+        
+        <div class="col-md-4">
+            <div class="p-3 py-5">
+               <form method="post" id="{{ form.helper.form_id }}">
+                    {% crispy profile_form %}
+                </form>
+                
+            </div>
+        </div>
+        
+    </div>
+</div>  
+
+{% endblock %}
+

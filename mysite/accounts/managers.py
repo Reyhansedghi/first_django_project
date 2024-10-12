@@ -8,13 +8,13 @@ from django.contrib import auth
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
-    def _create_user(self, phone_number, email, password, **extra_fields):
+    def _create_user(self, phone_number, password, **extra_fields):
         """
-        Create and save a user with the given phone_number, email, and password.
+        Create and save a user with the given phone_number, and password.
         """
         if not phone_number:
             raise ValueError("The given phone_number must be set")
-        email = self.normalize_email(email)
+        
         # Lookup the real model class from the global app registry so this
         # manager method can be used in migrations. This is fine because
         # managers are by definition working on the real model.
@@ -22,17 +22,17 @@ class UserManager(BaseUserManager):
             self.model._meta.app_label, self.model._meta.object_name
         )
         
-        user = self.model(phone_number=phone_number, email=email, **extra_fields)
+        user = self.model(phone_number=phone_number, **extra_fields)
         user.password = make_password(password)
         user.save(using=self._db)
         return user
 
-    def create_user(self, phone_number, email=None, password=None, **extra_fields):
+    def create_user(self, phone_number, password=None, **extra_fields):
         extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("is_superuser", False)
-        return self._create_user(phone_number, email, password, **extra_fields)
+        return self._create_user(phone_number, password, **extra_fields)
 
-    def create_superuser(self, phone_number, email=None, password=None, **extra_fields):
+    def create_superuser(self, phone_number, password=None, **extra_fields):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
 
@@ -41,7 +41,7 @@ class UserManager(BaseUserManager):
         if extra_fields.get("is_superuser") is not True:
             raise ValueError("Superuser must have is_superuser=True.")
 
-        return self._create_user(phone_number, email, password, **extra_fields)
+        return self._create_user(phone_number, password, **extra_fields)
 
     def with_perm(
         self, perm, is_active=True, include_superusers=True, backend=None, obj=None

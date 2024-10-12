@@ -1,11 +1,15 @@
 
 from django import forms
-from django.contrib.auth import authenticate, get_user_model, password_validation
+from django.contrib.auth import  get_user_model, password_validation
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
-from .models import User
+from .models import User,UserProfile
+
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth import get_user_model
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
+from crispy_forms.layout import Layout, Field
 
 
 
@@ -116,13 +120,9 @@ class UserChangeForm(forms.ModelForm):
                 "content_type"
             )
 
-
-
 class UserRegistrationForm(forms.Form):
-    email = forms.EmailField()
+   
     phone_number = forms.CharField(max_length=11)
-    first_name = forms.CharField(max_length=150)
-    last_name = forms.CharField(max_length=150)
     password1 = forms.CharField(
         label=_("Password"),
         strip=False,
@@ -165,25 +165,43 @@ class UserRegistrationForm(forms.Form):
             )
         return password2
 
+   
+class UserProfileForm(forms.ModelForm):
+    status = forms.RadioSelect()
+    companytype = forms.Select()
+    first_name = forms.CharField()
+    last_name = forms.CharField()
+    company_name = forms.CharField()
+    city = forms.Select()
+    social_media = forms.Textarea()
+    
+    class Meta:
+        model=UserProfile
+        fields=['status','companytype','first_name','last_name','company_name','city','social_media']
 
-
-    def clean_email(self):
-        """Reject usernames that differ only in case."""
-        email = self.cleaned_data.get("email")
-        User=get_user_model()
-        if email and User.objects.filter(email=email).exists():
-            raise(
-                ValidationError(
-                    {
-                        "email": self.instance.unique_error_message(
-                            User, ["email"]
-                        )
-                    }
-                )
-            )
-        else:
-            return email
-
+    def __init__(self, *args, **kwargs):
+        super(UserProfileForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'id-contact-form'
+        self.helper.form_method = 'post'
+        self.helper.add_input(Submit('submit', 'ذخیره اطلاعات'))
+        self.helper.layout = Layout(
+            Field('status', css_class='form-check-input',),
+            Field('companytype', css_class='form-control'),
+            Field('first_name', css_class='form-control'),
+            Field('last_name', css_class='form-control'),
+            Field('company_name', css_class='form-control'),
+            Field('city', css_class='form-control'),
+            Field('social_media', css_class='form-control'),
+        )
 
 class VerifyCodeForm(forms.Form):
     code = forms.IntegerField()
+
+class LoginForm(forms.Form):
+    phone_number = forms.CharField(max_length=11)
+    password = forms.CharField(
+        label=_("Password"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={"autocomplete": "new-password"}),
+    )

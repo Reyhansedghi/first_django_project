@@ -5,8 +5,6 @@ urlpatterns=[
     path('',post_list,name='post_list'),
     path('post/<slug:slug>',post_detail,name='post_detail'),
     path('category/<slug:category_slug>/',post_list,name='categorypost_list'),
-    path('subcategory/<slug:subcategory_slug>/',post_list,name='subcategorypost_list'),
-    path('subsubcategory/<slug:subsubcategory_slug>/',post_list,name='subsubcategorypost_list'),
     path('tag/<slug:tag_slug>/',post_list,name='tagpost_list'),
    # path('author/<int:author_pk>/',goods_list,name='author_list'),
 ]

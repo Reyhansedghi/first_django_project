@@ -1,5 +1,6 @@
-{% extends "products/base.html" %}
+{% extends "blog/base.html" %}
 {% load static %}
+{% load category_tags %}
 {% block content %}
 
 
@@ -24,7 +25,7 @@
                                     <div class="p-4 pb-0">
                                         <h5 class="text-primary mb-3">${{post.product.sellingprice}}</h5>
                                         <a class="d-block h5 mb-2" href='{% url "blog:post_detail" post.slug %}'>{{post.product.title}}</a>
-                                        <p><a href='{% url "blog:categorypost_list" post.product.get_categoryslug %}'>{{post.product.get_category}} </a>><a href='{% url "blog:subcategorypost_list" post.product.get_subcategoryslug %}'> {{post.product.get_subcategory}} </a> > <a href='{% url "blog:subsubcategorypost_list" post.product.get_subsubcategoryslug %}'> {{post.product.get_subsubcategory}} </a></p>
+                                        
                                     </div>
                                     <div class="d-flex border-top">
                                         <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
