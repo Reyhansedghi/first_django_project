@@ -2,14 +2,11 @@
 from django.shortcuts import render, redirect
 from .forms import UserRegistrationForm, VerifyCodeForm,LoginForm,UserProfileForm
 from django.views import View
-from django.forms import inlineformset_factory
-from django.views.generic import TemplateView
 import random
 from extensions.utils import send_otp
-from .models import User, OtpCode,UserProfile
+from .models import User, OtpCode
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
 
 
 # Create your views here.

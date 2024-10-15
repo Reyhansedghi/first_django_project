@@ -1,9 +1,5 @@
-from typing import Any
-from django.db.models.query import QuerySet
 from django.shortcuts import render
-
 from django.shortcuts import get_object_or_404
-from accounts.models import User
 from taggit.models import Tag
 from .models import Post
 from .forms import Comment_form

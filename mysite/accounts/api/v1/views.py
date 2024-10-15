@@ -1,5 +1,4 @@
 from django.shortcuts import get_object_or_404
-from blog.models import Post
 from services.models import Services
 from products.models import Product
 from itertools import chain
@@ -8,17 +7,16 @@ from rest_framework.permissions import (
     IsAuthenticatedOrReadOnly,
     IsAdminUser,
 )
-from . serializers import PostSerializer,ProductSerializer,ProductOrServiceSerializer
-from rest_framework.views import APIView
+from . serializers import ProductOrServiceSerializer
 from rest_framework import generics
-from .mixins import AuthorMixin
-class PostListApiView(AuthorMixin,generics.ListCreateAPIView):
+class PostListApiView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = ProductOrServiceSerializer
 
     def get_queryset(self):
-        products = Product.objects.all()
-        services = Services.objects.all()
+        user = self.request.user
+        products=Product.objects.filter(user=user)
+        services=Services.objects.filter(user=user)
         return chain(products, services)
     def perform_create(self, serializer):
         data = self.request.data
@@ -35,9 +33,10 @@ class ProductOrServiceDetailApiView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ProductOrServiceSerializer
 
     def get_queryset(self):
+        user = self.request.user
         if self.kwargs['object_type'] == 'product':
-            return Product.objects.all()
+            return Product.objects.filter(user=user)
         elif self.kwargs['object_type'] == 'service':
-            return Services.objects.all()
+            return Services.objects.filter(user=user)
         else:
             raise ValueError('Invalid object type')
