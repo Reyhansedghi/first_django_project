@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path,include
 from .views import post_list,post_detail
 app_name='blog'
 urlpatterns=[
@@ -7,4 +7,5 @@ urlpatterns=[
     path('category/<slug:category_slug>/',post_list,name='categorypost_list'),
     path('tag/<slug:tag_slug>/',post_list,name='tagpost_list'),
    # path('author/<int:author_pk>/',goods_list,name='author_list'),
+    path('api/v1/',include('blog.api.v1.urls')),
 ]

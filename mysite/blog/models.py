@@ -28,12 +28,14 @@ class Post(models.Model):
     
     def save(self,*args,**kwargs) :
         if not self.slug:
-            if self.type=='product':
+            if self.product:
                 self.slug=self.product.slug
                 self.category=self.product.get_categoryslug()
+                self.type='product'
             else:
                 self.slug=self.service.slug
                 self.category=self.service.get_categoryslug()
+                self.type='service'
         return super().save(*args,**kwargs)
     
  

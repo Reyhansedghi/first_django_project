@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-er$+$d%&$ua*8dti820u(ijvknp0wuddr*@7nwgp!15+9d&n)+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -47,6 +47,10 @@ INSTALLED_APPS = [
     'taggit',
     'crispy_forms',
     'crispy_bootstrap4',
+    'rest_framework',
+    'drf_spectacular',
+    'rest_framework.authtoken',
+
 
 
 ]
@@ -144,3 +148,14 @@ AUTH_USER_MODEL = "accounts.User"
 LOGIN_URL = '/login'
 
 LOGIN_REDIRECTURL=" "
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.AllowAny'],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        
+    ),
+}
